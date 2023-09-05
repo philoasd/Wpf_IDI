@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>IDI.ICO</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="IDI.ICO" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="ShowMeTheXAML.MSBuild" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CameraManage\CameraManage.csproj" />
+    <ProjectReference Include="..\ImageProcessing\ImageProcessing.csproj" />
+    <ProjectReference Include="..\IOControl\IOControl.csproj" />
+    <ProjectReference Include="..\LaserControlManager\LaserControlManager.csproj" />
+    <ProjectReference Include="..\MotorManager\MotorManager.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ACS.SPiiPlusNET6">
+      <HintPath>C:\Program Files (x86)\ACS Motion Control\SPiiPlus ADK Suite v3.13\SPiiPlus .NET Library\ACS.SPiiPlusNET6.dll</HintPath>
+    </Reference>
+    <Reference Include="Automation.BDaq4">
+      <HintPath>C:\Advantech\DAQNavi\Automation.BDaq\4.0.0.0\Automation.BDaq4.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

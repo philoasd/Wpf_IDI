@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf_IDI", "Wpf_IDI\Wpf_IDI.csproj", "{D4770E7D-D5EA-4C76-8376-09280D98F6B0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CameraManage", "CameraManage\CameraManage.csproj", "{F2502BE3-A2DB-489F-B449-38C1427EC45C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessing", "ImageProcessing\ImageProcessing.csproj", "{C2A54E61-1DD8-4F24-94DE-290D3200B567}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MotorManager", "MotorManager\MotorManager.csproj", "{98ABFFE3-E636-44A0-814B-41120075786D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOControl", "IOControl\IOControl.csproj", "{2F3D51BE-BB73-4DF7-891D-E43B47B4C5DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaserControlManager", "LaserControlManager\LaserControlManager.csproj", "{E855A742-39C4-4379-B1A3-01B4FC928F8A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4770E7D-D5EA-4C76-8376-09280D98F6B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4770E7D-D5EA-4C76-8376-09280D98F6B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4770E7D-D5EA-4C76-8376-09280D98F6B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4770E7D-D5EA-4C76-8376-09280D98F6B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2502BE3-A2DB-489F-B449-38C1427EC45C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2502BE3-A2DB-489F-B449-38C1427EC45C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2502BE3-A2DB-489F-B449-38C1427EC45C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2502BE3-A2DB-489F-B449-38C1427EC45C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2A54E61-1DD8-4F24-94DE-290D3200B567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2A54E61-1DD8-4F24-94DE-290D3200B567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2A54E61-1DD8-4F24-94DE-290D3200B567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2A54E61-1DD8-4F24-94DE-290D3200B567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98ABFFE3-E636-44A0-814B-41120075786D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98ABFFE3-E636-44A0-814B-41120075786D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98ABFFE3-E636-44A0-814B-41120075786D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98ABFFE3-E636-44A0-814B-41120075786D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F3D51BE-BB73-4DF7-891D-E43B47B4C5DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F3D51BE-BB73-4DF7-891D-E43B47B4C5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F3D51BE-BB73-4DF7-891D-E43B47B4C5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F3D51BE-BB73-4DF7-891D-E43B47B4C5DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E855A742-39C4-4379-B1A3-01B4FC928F8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E855A742-39C4-4379-B1A3-01B4FC928F8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E855A742-39C4-4379-B1A3-01B4FC928F8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E855A742-39C4-4379-B1A3-01B4FC928F8A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A20E7C3-43A4-43D3-A574-526144C14174}
+	EndGlobalSection
+EndGlobal
