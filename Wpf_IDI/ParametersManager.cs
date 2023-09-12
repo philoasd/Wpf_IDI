@@ -75,6 +75,9 @@ namespace Wpf_IDI
             return jsonData ?? new Dictionary<string, Dictionary<string, object>>();
         }
 
+        /// <summary>
+        /// 参数名称枚举
+        /// </summary>
         public enum PName
         {
             Calibration,
@@ -82,6 +85,7 @@ namespace Wpf_IDI
             SpiiMotor,
             LaserTcp
         }
+        
         /// <summary>
         /// 获取参数文件名称
         /// </summary>
