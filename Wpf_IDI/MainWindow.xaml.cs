@@ -45,6 +45,7 @@ namespace Wpf_IDI
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            // 断开运动轴的连接
             if (_SpiiPlusManager.InitSpii)
             {
                 this.ConnectedSpii.IsChecked = false;
