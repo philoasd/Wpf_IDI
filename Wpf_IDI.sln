@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessing", "ImagePro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MotorManager", "MotorManager\MotorManager.csproj", "{98ABFFE3-E636-44A0-814B-41120075786D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOControl", "IOControl\IOControl.csproj", "{2F3D51BE-BB73-4DF7-891D-E43B47B4C5DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IOControl", "IOControl\IOControl.csproj", "{2F3D51BE-BB73-4DF7-891D-E43B47B4C5DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaserControlManager", "LaserControlManager\LaserControlManager.csproj", "{E855A742-39C4-4379-B1A3-01B4FC928F8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaserControlManager", "LaserControlManager\LaserControlManager.csproj", "{E855A742-39C4-4379-B1A3-01B4FC928F8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1853,6 +1853,8 @@ namespace Wpf_IDI
                 _ParametersData.IsDrawing = false;
                 return;
             }
+            _ParametersData.IsDrawing = true;
+
             startPoint = e.GetPosition(this.CanvasDXF);
 
             LineGeometry lineGeometry = new LineGeometry()
@@ -1962,7 +1964,7 @@ namespace Wpf_IDI
                     }
             }
 
-            _ParametersData.IsDrawing = true;
+            
         }
 
         private void CanvasDXF_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -2177,6 +2179,9 @@ namespace Wpf_IDI
         }
     }
 
+    /// <summary>
+    /// 将值减半
+    /// </summary>
     public class ValueHalf : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

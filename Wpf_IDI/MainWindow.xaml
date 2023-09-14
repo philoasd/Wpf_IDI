@@ -1695,43 +1695,43 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="0" Click="DrawingButton_Click">
+                                    <Button Grid.Row="0" Grid.Column="0" x:Name="LineScan" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="0" Click="DrawingButton_Click">
                                         <materialDesign:PackIcon Kind="LineScan"/>
                                     </Button>
 
-                                    <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="1" Click="DrawingButton_Click">
+                                    <Button Grid.Row="0" Grid.Column="1" x:Name="SquareOutline" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="1" Click="DrawingButton_Click">
                                         <materialDesign:PackIcon Kind="SquareOutline"/>
                                     </Button>
 
-                                    <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="2" Click="DrawingButton_Click">
+                                    <Button Grid.Row="0" Grid.Column="2" x:Name="CircleOutline"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="2" Click="DrawingButton_Click">
                                         <materialDesign:PackIcon Kind="CircleOutline"/>
                                     </Button>
 
-                                    <Button Grid.Row="0" Grid.Column="3" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="3" Click="DrawingButton_Click">
+                                    <Button Grid.Row="0" Grid.Column="3" x:Name="TriangleOutline"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="3" Click="DrawingButton_Click">
                                         <materialDesign:PackIcon Kind="TriangleOutline"/>
                                     </Button>
 
-                                    <Button Grid.Row="0" Grid.Column="4" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="4" Click="DrawingButton_Click">
+                                    <Button Grid.Row="0" Grid.Column="4" x:Name="TriangleWave"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="4" Click="DrawingButton_Click">
                                         <materialDesign:PackIcon Kind="TriangleWave" />
                                     </Button>
 
-                                    <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="5" Click="DrawingButton_Click">
+                                    <Button Grid.Row="1" Grid.Column="0" x:Name="EllipseOutline"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="5" Click="DrawingButton_Click">
                                         <materialDesign:PackIcon Kind="EllipseOutline" />
                                     </Button>
 
-                                    <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="6" Click="DrawingButton_Click">
+                                    <Button Grid.Row="1" Grid.Column="1" x:Name="SquareRoundedOutline"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="6" Click="DrawingButton_Click">
                                         <materialDesign:PackIcon Kind="SquareRoundedOutline" />
                                     </Button>
 
-                                    <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="7" Click="DrawingButton_Click">
+                                    <Button Grid.Row="1" Grid.Column="2" x:Name="Barcode"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="7" Click="DrawingButton_Click">
                                         <materialDesign:PackIcon Kind="Barcode" />
                                     </Button>
 
-                                    <Button Grid.Row="1" Grid.Column="3" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="8" Click="DrawingButton_Click">
+                                    <Button Grid.Row="1" Grid.Column="3" x:Name="FormatTextVariantOutline"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="8" Click="DrawingButton_Click">
                                         <materialDesign:PackIcon Kind="FormatTextVariantOutline" />
                                     </Button>
 
-                                    <Button Grid.Row="1" Grid.Column="4" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="9" Click="DrawingButton_Click">
+                                    <Button Grid.Row="1" Grid.Column="4" x:Name="Image"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="9" Click="DrawingButton_Click">
                                         <materialDesign:PackIcon Kind="Image" />
                                     </Button>
                                 </Grid>
