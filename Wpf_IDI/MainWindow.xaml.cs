@@ -2024,178 +2024,19 @@ namespace Wpf_IDI
         }
     }
 
-    /// <summary>
-    /// 颜色和bool互相转换
-    /// </summary>
-    public class ColorToBooleanConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is SolidColorBrush brush && brush.Color == Colors.Red)
-            {
-                return false;
-            }
-            else if (value is SolidColorBrush brush1 && brush1.Color == Colors.Green)
-            {
-                return true;
-            }
+    //public class ButtonProfile
+    //{
+    //    public int IoIndex { get; set; }
+    //    public int Port { get; set; }
+    //    public int Bit { get; set; }
+    //    public bool IsClicked { get; set; }
 
-            if (value is bool boolValue)
-            {
-                return boolValue ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Red);
-            }
-
-            return Binding.DoNothing;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is bool boolValue)
-            {
-                return boolValue ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Red);
-            }
-
-            if (value is SolidColorBrush brush && brush.Color == Colors.Red)
-            {
-                return false;
-            }
-            else if (value is SolidColorBrush brush1 && brush1.Color == Colors.Green)
-            {
-                return true;
-            }
-
-            return Binding.DoNothing;
-        }
-    }
-
-    public class ButtonProfile
-    {
-        public int IoIndex { get; set; }
-        public int Port { get; set; }
-        public int Bit { get; set; }
-        public bool IsClicked { get; set; }
-
-        public ButtonProfile(int _IoIndex, int _Port, int _Bit, bool _IsClicked)
-        {
-            IoIndex = _IoIndex;
-            Port = _Port;
-            Bit = _Bit;
-            IsClicked = _IsClicked;
-        }
-    }
-
-    /// <summary>
-    /// 反转bool
-    /// </summary>
-    public class BooleanNegationConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is bool boolValue)
-            {
-                return !boolValue;
-            }
-            return value;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    /// <summary>
-    /// 将bool值变为str
-    /// </summary>
-    public class BoolToLabelConverterForCalButton : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is bool boolValue)
-            {
-                if (parameter is string str)
-                {
-                    var arr = str.Split(';');
-                    if (arr.Length > 1)
-                    {
-                        return boolValue ? arr[0] : arr[1];
-                    }
-                    return "控件名称未知";
-                }
-                return "控件名称未知";
-            }
-            return "控件名称未知";
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    /// <summary>
-    /// 多重绑定，先反转bool，再将bool转为颜色
-    /// </summary>
-    public class MultiBool2ColorConverter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (values.Length >= 1 && values[0] is bool boolValue)
-            {
-                bool invertedBool = !boolValue;
-
-                Color backgroundColor = invertedBool ? Colors.Green : Colors.Red;
-                return new SolidColorBrush(backgroundColor);
-            }
-
-            return Brushes.Transparent;
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException();
-        }
-    }
-
-    /// <summary>
-    /// 多重绑定，先反转bool，再将bool转为visible
-    /// </summary>
-    public class MultiBool2VisibleConveter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (values.Length >= 1 && values[0] is bool boolValue)
-            {
-                bool invertedBool = !boolValue;
-                return invertedBool ? Visibility.Visible : Visibility.Collapsed;
-            }
-
-            return Binding.DoNothing;
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException();
-        }
-    }
-
-    /// <summary>
-    /// 将值减半
-    /// </summary>
-    public class ValueHalf : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is double dValue)
-            {
-                return dValue / 2;
-            }
-            return Binding.DoNothing;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
+    //    public ButtonProfile(int _IoIndex, int _Port, int _Bit, bool _IsClicked)
+    //    {
+    //        IoIndex = _IoIndex;
+    //        Port = _Port;
+    //        Bit = _Bit;
+    //        IsClicked = _IsClicked;
+    //    }
+    //}
 }

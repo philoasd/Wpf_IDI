@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf_IDI"
+        xmlns:converters="clr-namespace:Wpf_IDI.Converters"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         d:DataContext="{d:DesignInstance Type=local:ParametersData}"
         mc:Ignorable="d"
@@ -17,12 +18,12 @@
             <!--<Setter Property="BorderBrush" Value="Black"/>-->
         </Style>
 
-        <local:BooleanNegationConverter x:Key="BooleanNegationConverter"/>
-        <local:ColorToBooleanConverter x:Key="ColorToBooleanConverter"/>
-        <local:BoolToLabelConverterForCalButton x:Key="BoolToLabelConverterForCalButton"/>
-        <local:MultiBool2ColorConverter x:Key="MultiBool2ColorConverter"/>
-        <local:MultiBool2VisibleConveter x:Key="MultiBool2VisibleConveter"/>
-        <local:ValueHalf x:Key="ValueHalf"/>
+        <converters:BooleanNegationConverter x:Key="BooleanNegationConverter"/>
+        <converters:ColorToBooleanConverter x:Key="ColorToBooleanConverter"/>
+        <converters:BoolToLabelConverterForCalButton x:Key="BoolToLabelConverterForCalButton"/>
+        <converters:MultiBool2ColorConverter x:Key="MultiBool2ColorConverter"/>
+        <converters:MultiBool2VisibleConveter x:Key="MultiBool2VisibleConveter"/>
+        <converters:ValueHalf x:Key="ValueHalf"/>
     </Window.Resources>
 
     <Grid>
