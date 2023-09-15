@@ -60,8 +60,8 @@
                             </ToggleButton>
                             <Label FontSize="12" FontWeight="Bold"
                                 Content="Exposure" HorizontalAlignment="Left" Margin="10,137,0,0" VerticalAlignment="Top" Width="78" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False"/>
-                            <TextBox x:Name="CameraExposure" Text="{Binding CameraExposure,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                     IsEnabled="{Binding ElementName=ConnectedCameraButton,Path=IsChecked}"
+                            <TextBox x:Name="CameraExposure" Text="{Binding CameraExposure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     IsEnabled="{Binding IsChecked, ElementName=ConnectedCameraButton}"
                                      BorderBrush="Black" BorderThickness="1" TextChanged="CameraExposure_TextChanged" HorizontalAlignment="Left" Margin="93,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" Height="28" TextAlignment="Center"/>
 
                             <Label FontSize="12" FontWeight="Bold"
@@ -79,22 +79,22 @@
                             <RadioButton Style="{StaticResource MaterialDesignRadioButton}" x:Name="GrabContinueButton"
                                 Content="Grab Continue" HorizontalAlignment="Left" Margin="107,85,0,0" VerticalAlignment="Top" Height="23" Width="108"/>
 
-                            <Button x:Name="GrabButton" Click="GrabButton_Click" IsEnabled="{Binding ElementName=ConnectedCameraButton,Path=IsChecked}"
+                            <Button x:Name="GrabButton" Click="GrabButton_Click" IsEnabled="{Binding IsChecked, ElementName=ConnectedCameraButton}"
                                     materialDesign:ButtonAssist.CornerRadius="10" Style="{StaticResource MaterialDesignRaisedButton}"  Background="Green" HorizontalAlignment="Left" Margin="227,76,0,0" Width="120" VerticalAlignment="Top" Height="40">
                                 <TextBlock x:Name="CameraGrabMovement" Text="Grab Start"/>
                             </Button>
 
-                            <Button IsEnabled="{Binding ElementName=ConnectedCameraButton,Path=IsChecked,Converter={StaticResource BooleanNegationConverter}}"
+                            <Button IsEnabled="{Binding IsChecked, Converter={StaticResource BooleanNegationConverter}, ElementName=ConnectedCameraButton}"
                                     Background="Green" x:Name="ReSearchCameraButton" Click="ReSearchCameraButton_Click"
                                      materialDesign:ButtonAssist.CornerRadius="10" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="40" Margin="353,76,0,0">
                                 <TextBlock x:Name="CameraReSearch" Text="ReSearch Camera" FontSize="11"/>
                             </Button>
-                            <Button Background="Green" x:Name="SaveImageButton" Click="SaveImageButton_Click" IsEnabled="{Binding ElementName=ConnectedCameraButton,Path=IsChecked}"
+                            <Button Background="Green" x:Name="SaveImageButton" Click="SaveImageButton_Click" IsEnabled="{Binding IsChecked, ElementName=ConnectedCameraButton}"
                                      materialDesign:ButtonAssist.CornerRadius="10" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="347,186,0,0" Height="38" Width="112">
                                 <TextBlock Text="Save Image" FontSize="12"/>
                             </Button>
 
-                            <Button Background="Green" x:Name="CameraCalibrationButton" Click="CameraCalibrationButton_Click" IsEnabled="{Binding ElementName=ConnectedCameraButton,Path=IsChecked}"
+                            <Button Background="Green" x:Name="CameraCalibrationButton" Click="CameraCalibrationButton_Click" IsEnabled="{Binding IsChecked, ElementName=ConnectedCameraButton}"
                                 materialDesign:ButtonAssist.CornerRadius="10" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,402,0,0" Height="38" Width="140">
                                 <TextBlock Text="Camera Calibration" FontSize="12"/>
                             </Button>
@@ -144,12 +144,12 @@
                             </GroupBox>
                             <Button x:Name="ModifyParameterButton" Click="ModifyParameterButton_Click"
                                 materialDesign:ButtonAssist.CornerRadius="10" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,324,0,0" Height="47" Width="138">
-                                <TextBlock Text="{Binding ModifyParameterButtonClicked,Converter={StaticResource BoolToLabelConverterForCalButton},ConverterParameter='Save Calibration Parameter;Modify Calibration Paramete'}" x:Name="CameraCalibrationParameterTextBlock" FontSize="12" TextWrapping="Wrap" TextAlignment="Center"/>
                                 <Button.Background>
                                     <MultiBinding Converter="{StaticResource MultiBool2ColorConverter}">
                                         <Binding Path="ModifyParameterButtonClicked"/>
                                     </MultiBinding>
                                 </Button.Background>
+                                <TextBlock Text="{Binding ModifyParameterButtonClicked, ConverterParameter=Save Calibration Parameter;Modify Calibration Paramete, Converter={StaticResource BoolToLabelConverterForCalButton}}" x:Name="CameraCalibrationParameterTextBlock" FontSize="12" TextWrapping="Wrap" TextAlignment="Center"/>
                             </Button>
                         </Grid>
 
@@ -178,14 +178,14 @@
 
                             <Label FontSize="16" FontWeight="Bold"
             Content="Ip" HorizontalAlignment="Left" Margin="52,20,0,0" VerticalAlignment="Top" Width="37" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False"/>
-                            <TextBox x:Name="IpOfSpii" IsEnabled="{Binding ElementName=ConnectedSpii,Path=IsChecked,Converter={StaticResource BooleanNegationConverter}}"
+                            <TextBox x:Name="IpOfSpii" IsEnabled="{Binding IsChecked, Converter={StaticResource BooleanNegationConverter}, ElementName=ConnectedSpii}"
                                      HorizontalAlignment="Left" Margin="94,21,0,0" TextWrapping="Wrap" Text="192.168.3.100" VerticalAlignment="Top" Width="105" Height="28" TextAlignment="Center"/>
 
                             <Label FontSize="16" FontWeight="Bold"
             Content="port" HorizontalAlignment="Left" Margin="231,20,0,0" VerticalAlignment="Top" Width="51" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False"/>
-                            <TextBox x:Name="PortOfSpii" IsEnabled="{Binding ElementName=ConnectedSpii,Path=IsChecked,Converter={StaticResource BooleanNegationConverter}}"  HorizontalAlignment="Left" Margin="287,21,0,0" TextWrapping="Wrap" Text="701" VerticalAlignment="Top" Width="63" Height="28" TextAlignment="Center"/>
+                            <TextBox x:Name="PortOfSpii" IsEnabled="{Binding IsChecked, Converter={StaticResource BooleanNegationConverter}, ElementName=ConnectedSpii}"  HorizontalAlignment="Left" Margin="287,21,0,0" TextWrapping="Wrap" Text="701" VerticalAlignment="Top" Width="63" Height="28" TextAlignment="Center"/>
 
-                            <GroupBox  Margin="52,65,0,211" IsEnabled="{Binding ElementName=ConnectedSpii,Path=IsChecked}"
+                            <GroupBox  Margin="52,65,0,211" IsEnabled="{Binding IsChecked, ElementName=ConnectedSpii}"
                    materialDesign:ColorZoneAssist.Mode="SecondaryMid" Header="Motor Parameter"  Style="{StaticResource MaterialDesignGroupBox}" HorizontalAlignment="Left" Width="696">
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -234,106 +234,105 @@
                                     <!-- Row 0, Column 9 -->
                                     <TextBlock Grid.Row="9" Grid.Column="0" Text="Position Error" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                                    <ToggleButton Grid.Row="0" Grid.Column="0" Width="60" IsEnabled="{Binding ElementName=ConnectedSpii,Path=IsChecked}"
+                                    <ToggleButton Grid.Row="0" Grid.Column="0" Width="60" IsEnabled="{Binding IsChecked, ElementName=ConnectedSpii}"
                                                   IsChecked="{Binding IsAllAxisEnable}"
                                                   Style="{StaticResource MaterialDesignSwitchToggleButton}" x:Name="EnableAllAxisButton" Click="EnableAllAxisButton_Click"
                                                   materialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green"
-                                                  materialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red">
-                                    </ToggleButton>
+                                                  materialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red"/>
 
                                     <!-- Row 0, Column 1 -->
                                     <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
                                         <TextBlock Text="Axis 0(X)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <TextBlock Width="10" IsEnabled="False"></TextBlock>
+                                        <TextBlock Width="10" IsEnabled="False"/>
                                         <ToggleButton Content="X" x:Name="EnableAxis0Button" Click="EnableAxis0Button_Click"
                                                       Style="{StaticResource MaterialDesignActionSecondaryToggleButton}"
                                                       IsChecked="{Binding IsEnable0}"
-                                                      Background="{Binding IsChecked, Converter={StaticResource ColorToBooleanConverter}, RelativeSource={RelativeSource Self}}"/>
+                                                      Background="{Binding IsChecked, Converter={StaticResource ColorToBooleanConverter}, RelativeSource={RelativeSource Mode=Self}}"/>
                                     </StackPanel>
 
                                     <!-- Row 0, Column 2 -->
                                     <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,5,0">
                                         <TextBlock Text="Axis 1(Y)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <TextBlock Width="10" IsEnabled="False"></TextBlock>
+                                        <TextBlock Width="10" IsEnabled="False"/>
                                         <ToggleButton Content="X" x:Name="EnableAxis1Button" Click="EnableAxis1Button_Click"
                                                       IsChecked="{Binding IsEnable1}"
-                                                      Background="{Binding IsChecked, Converter={StaticResource ColorToBooleanConverter}, RelativeSource={RelativeSource Self}}"
+                                                      Background="{Binding IsChecked, Converter={StaticResource ColorToBooleanConverter}, RelativeSource={RelativeSource Mode=Self}}"
                                                       Style="{StaticResource MaterialDesignActionSecondaryToggleButton}" ToolTip="MaterialDesignActionSecondaryToggleButton" />
                                     </StackPanel>
 
                                     <!-- Row 0, Column 3 -->
                                     <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center">
                                         <TextBlock Text="Axis 2(Z)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <TextBlock Width="10" IsEnabled="False"></TextBlock>
+                                        <TextBlock Width="10" IsEnabled="False"/>
                                         <ToggleButton Content="X" x:Name="EnableAxis2Button" Click="EnableAxis2Button_Click"
                                                       IsChecked="{Binding IsEnable2}"
-                                                      Background="{Binding IsChecked, Converter={StaticResource ColorToBooleanConverter}, RelativeSource={RelativeSource Self}}"
+                                                      Background="{Binding IsChecked, Converter={StaticResource ColorToBooleanConverter}, RelativeSource={RelativeSource Mode=Self}}"
                                                       Style="{StaticResource MaterialDesignActionSecondaryToggleButton}" ToolTip="MaterialDesignActionSecondaryToggleButton"/>
                                     </StackPanel>
 
 
                                     <!-- Row 1, Column 1 -->
-                                    <TextBox Grid.Row="1" Tag="v0" TextChanged="SetAxisMovingParameters" Grid.Column="1" Text="{Binding Velocity0,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" VerticalAlignment="Center" x:Name="Velocity0" TextAlignment="Center" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=EnableAxis0Button,Path=IsChecked}"/>
+                                    <TextBox Grid.Row="1" Tag="v0" TextChanged="SetAxisMovingParameters" Grid.Column="1" Text="{Binding Velocity0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" x:Name="Velocity0" TextAlignment="Center" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, ElementName=EnableAxis0Button}"/>
                                     <!-- Row 1, Column 2 -->
-                                    <TextBox Grid.Row="1" Tag="v1" Grid.Column="2" Text="{Binding Velocity1,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Velocity1" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=EnableAxis1Button,Path=IsChecked}"/>
+                                    <TextBox Grid.Row="1" Tag="v1" Grid.Column="2" Text="{Binding Velocity1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Velocity1" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, ElementName=EnableAxis1Button}"/>
                                     <!-- Row 1, Column 3 -->
-                                    <TextBox Grid.Row="1" Tag="v2" Grid.Column="3" Text="{Binding Velocity2,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Velocity2" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=EnableAxis2Button,Path=IsChecked}"/>
+                                    <TextBox Grid.Row="1" Tag="v2" Grid.Column="3" Text="{Binding Velocity2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Velocity2" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, ElementName=EnableAxis2Button}"/>
 
                                     <!-- Row 2, Column 1 -->
-                                    <TextBox Grid.Row="2" Tag="a0" Grid.Column="1" Text="{Binding Acceleration0,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Acceleration0" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=EnableAxis0Button,Path=IsChecked}"/>
+                                    <TextBox Grid.Row="2" Tag="a0" Grid.Column="1" Text="{Binding Acceleration0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Acceleration0" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, ElementName=EnableAxis0Button}"/>
                                     <!-- Row 2, Column 2 -->
-                                    <TextBox Grid.Row="2" Tag="a1" Grid.Column="2" Text="{Binding Acceleration1,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Acceleration1" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=EnableAxis1Button,Path=IsChecked}"/>
+                                    <TextBox Grid.Row="2" Tag="a1" Grid.Column="2" Text="{Binding Acceleration1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Acceleration1" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, ElementName=EnableAxis1Button}"/>
                                     <!-- Row 2, Column 3 -->
-                                    <TextBox Grid.Row="2" Tag="a2" Grid.Column="3" Text="{Binding Acceleration2,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Acceleration2" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=EnableAxis2Button,Path=IsChecked}"/>
+                                    <TextBox Grid.Row="2" Tag="a2" Grid.Column="3" Text="{Binding Acceleration2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Acceleration2" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, ElementName=EnableAxis2Button}"/>
 
                                     <!-- Row 3, Column 1 -->
-                                    <TextBox Grid.Row="3" Tag="d0" Grid.Column="1" Text="{Binding Deceleration0,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Deceleration0" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=EnableAxis0Button,Path=IsChecked}"/>
+                                    <TextBox Grid.Row="3" Tag="d0" Grid.Column="1" Text="{Binding Deceleration0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Deceleration0" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, ElementName=EnableAxis0Button}"/>
                                     <!-- Row 3, Column 2 -->
-                                    <TextBox Grid.Row="3" Tag="d1" Grid.Column="2" Text="{Binding Deceleration1,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Deceleration1" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=EnableAxis1Button,Path=IsChecked}"/>
+                                    <TextBox Grid.Row="3" Tag="d1" Grid.Column="2" Text="{Binding Deceleration1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Deceleration1" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, ElementName=EnableAxis1Button}"/>
                                     <!-- Row 3, Column 3 -->
-                                    <TextBox Grid.Row="3" Tag="d2" Grid.Column="3" Text="{Binding Deceleration2,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Deceleration2" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=EnableAxis2Button,Path=IsChecked}"/>
+                                    <TextBox Grid.Row="3" Tag="d2" Grid.Column="3" Text="{Binding Deceleration2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Deceleration2" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, ElementName=EnableAxis2Button}"/>
 
                                     <!-- Row 4, Column 1 -->
-                                    <TextBox Grid.Row="4" Tag="k0" Grid.Column="1" Text="{Binding KillDeceleration0,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" VerticalAlignment="Center" x:Name="KillDeceleration0" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=EnableAxis0Button,Path=IsChecked}"/>
+                                    <TextBox Grid.Row="4" Tag="k0" Grid.Column="1" Text="{Binding KillDeceleration0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="KillDeceleration0" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, ElementName=EnableAxis0Button}"/>
                                     <!-- Row 4, Column 2 -->
-                                    <TextBox Grid.Row="4" Tag="k1" Grid.Column="2" Text="{Binding KillDeceleration1,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" VerticalAlignment="Center" x:Name="KillDeceleration1" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=EnableAxis1Button,Path=IsChecked}"/>
+                                    <TextBox Grid.Row="4" Tag="k1" Grid.Column="2" Text="{Binding KillDeceleration1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="KillDeceleration1" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, ElementName=EnableAxis1Button}"/>
                                     <!-- Row 4, Column 3 -->
-                                    <TextBox Grid.Row="4" Tag="k2" Grid.Column="3" Text="{Binding KillDeceleration2,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" VerticalAlignment="Center" x:Name="KillDeceleration2" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=EnableAxis2Button,Path=IsChecked}"/>
+                                    <TextBox Grid.Row="4" Tag="k2" Grid.Column="3" Text="{Binding KillDeceleration2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="KillDeceleration2" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, ElementName=EnableAxis2Button}"/>
 
                                     <!-- Row 5, Column 1 -->
-                                    <TextBox Grid.Row="5" Tag="j0" Grid.Column="1" Text="{Binding Jerk0,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Jerk0" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=EnableAxis0Button,Path=IsChecked}"/>
+                                    <TextBox Grid.Row="5" Tag="j0" Grid.Column="1" Text="{Binding Jerk0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Jerk0" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, ElementName=EnableAxis0Button}"/>
                                     <!-- Row 5, Column 2 -->
-                                    <TextBox Grid.Row="5" Tag="j1" Grid.Column="2" Text="{Binding Jerk1,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Jerk1" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=EnableAxis1Button,Path=IsChecked}"/>
+                                    <TextBox Grid.Row="5" Tag="j1" Grid.Column="2" Text="{Binding Jerk1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Jerk1" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, ElementName=EnableAxis1Button}"/>
                                     <!-- Row 5, Column 3 -->
-                                    <TextBox Grid.Row="5" Tag="j2" Grid.Column="3" Text="{Binding Jerk2,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Jerk2" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=EnableAxis2Button,Path=IsChecked}"/>
+                                    <TextBox Grid.Row="5" Tag="j2" Grid.Column="3" Text="{Binding Jerk2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="Jerk2" BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, ElementName=EnableAxis2Button}"/>
 
                                     <!-- Row 6, Column 1 -->
-                                    <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding ReferencePosition0,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:F3}}" TextAlignment="Center" VerticalAlignment="Center" x:Name="ReferencePosition0" IsEnabled="False"/>
+                                    <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding ReferencePosition0, Mode=TwoWay, StringFormat=\{0:F3\}, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="ReferencePosition0" IsEnabled="False"/>
                                     <!-- Row 6, Column 2 -->
-                                    <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding ReferencePosition1,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:F3}}" TextAlignment="Center" VerticalAlignment="Center" x:Name="ReferencePosition1" IsEnabled="False"/>
+                                    <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding ReferencePosition1, Mode=TwoWay, StringFormat=\{0:F3\}, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="ReferencePosition1" IsEnabled="False"/>
                                     <!-- Row 6, Column 3 -->
-                                    <TextBox Grid.Row="6" Grid.Column="3" Text="{Binding ReferencePosition2,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:F3}}" TextAlignment="Center" VerticalAlignment="Center" x:Name="ReferencePosition2" IsEnabled="False"/>
+                                    <TextBox Grid.Row="6" Grid.Column="3" Text="{Binding ReferencePosition2, Mode=TwoWay, StringFormat=\{0:F3\}, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="ReferencePosition2" IsEnabled="False"/>
 
                                     <!-- Row 7, Column 1 -->
-                                    <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding FeedbackPosition0,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:F3}}" TextAlignment="Center" VerticalAlignment="Center" x:Name="FeedbackPosition0" IsEnabled="False"/>
+                                    <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding FeedbackPosition0, Mode=TwoWay, StringFormat=\{0:F3\}, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="FeedbackPosition0" IsEnabled="False"/>
                                     <!-- Row 7, Column 2 -->
-                                    <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding FeedbackPosition1,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:F3}}" TextAlignment="Center" VerticalAlignment="Center" x:Name="FeedbackPosition1" IsEnabled="False"/>
+                                    <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding FeedbackPosition1, Mode=TwoWay, StringFormat=\{0:F3\}, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="FeedbackPosition1" IsEnabled="False"/>
                                     <!-- Row 7, Column 3 -->
-                                    <TextBox Grid.Row="7" Grid.Column="3" Text="{Binding FeedbackPosition2,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:F3}}" TextAlignment="Center" VerticalAlignment="Center" x:Name="FeedbackPosition2" IsEnabled="False"/>
+                                    <TextBox Grid.Row="7" Grid.Column="3" Text="{Binding FeedbackPosition2, Mode=TwoWay, StringFormat=\{0:F3\}, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="FeedbackPosition2" IsEnabled="False"/>
 
                                     <!-- Row 8, Column 1 -->
-                                    <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding ActualVelocity0,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:F3}}" TextAlignment="Center" VerticalAlignment="Center" x:Name="ActualVelocity0" IsEnabled="False"/>
+                                    <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding ActualVelocity0, Mode=TwoWay, StringFormat=\{0:F3\}, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="ActualVelocity0" IsEnabled="False"/>
                                     <!-- Row 8, Column 2 -->
-                                    <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding ActualVelocity1,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:F3}}" TextAlignment="Center" VerticalAlignment="Center" x:Name="ActualVelocity1" IsEnabled="False"/>
+                                    <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding ActualVelocity1, Mode=TwoWay, StringFormat=\{0:F3\}, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="ActualVelocity1" IsEnabled="False"/>
                                     <!-- Row 8, Column 3 -->
-                                    <TextBox Grid.Row="8" Grid.Column="3" Text="{Binding ActualVelocity2,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:F3}}" TextAlignment="Center" VerticalAlignment="Center" x:Name="ActualVelocity2" IsEnabled="False"/>
+                                    <TextBox Grid.Row="8" Grid.Column="3" Text="{Binding ActualVelocity2, Mode=TwoWay, StringFormat=\{0:F3\}, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="ActualVelocity2" IsEnabled="False"/>
 
                                     <!-- Row 9, Column 1 -->
-                                    <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding PositionError0,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:F3}}" TextAlignment="Center" VerticalAlignment="Center" x:Name="PositionError0" IsEnabled="False"/>
+                                    <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding PositionError0, Mode=TwoWay, StringFormat=\{0:F3\}, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="PositionError0" IsEnabled="False"/>
                                     <!-- Row 9, Column 2 -->
-                                    <TextBox Grid.Row="9" Grid.Column="2" Text="{Binding PositionError1,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:F3}}" TextAlignment="Center" VerticalAlignment="Center" x:Name="PositionError1" IsEnabled="False"/>
+                                    <TextBox Grid.Row="9" Grid.Column="2" Text="{Binding PositionError1, Mode=TwoWay, StringFormat=\{0:F3\}, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="PositionError1" IsEnabled="False"/>
                                     <!-- Row 9, Column 3 -->
-                                    <TextBox Grid.Row="9" Grid.Column="3" Text="{Binding PositionError2,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:F3}}" TextAlignment="Center" VerticalAlignment="Center" x:Name="PositionError2" IsEnabled="False"/>
+                                    <TextBox Grid.Row="9" Grid.Column="3" Text="{Binding PositionError2, Mode=TwoWay, StringFormat=\{0:F3\}, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Center" x:Name="PositionError2" IsEnabled="False"/>
 
                                     <TextBlock Grid.Row="10" Grid.Column="0" Text="Moving" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     <Border Grid.Row="10" Grid.Column="1" x:Name="IsMoving0" 
@@ -383,13 +382,12 @@
         Background="{Binding IsRightLimit2, Converter={StaticResource ColorToBooleanConverter}}" CornerRadius="15" VerticalAlignment="Center" Width="30" Height="30"/>
 
                                     <StackPanel Grid.Row="16" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding ElementName=SelectJogOrPTPButton,Path=IsChecked,Converter={StaticResource BoolToLabelConverterForCalButton},ConverterParameter='Jog;PTP'}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding IsChecked, ConverterParameter=Jog;PTP, Converter={StaticResource BoolToLabelConverterForCalButton}, ElementName=SelectJogOrPTPButton}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         <TextBlock Width="10"/>
-                                        <ToggleButton Grid.Row="0" Grid.Column="0" Width="40" IsEnabled="{Binding ElementName=ConnectedSpii,Path=IsChecked}"
+                                        <ToggleButton Grid.Row="0" Grid.Column="0" Width="40" IsEnabled="{Binding IsChecked, ElementName=ConnectedSpii}"
               Style="{StaticResource MaterialDesignSwitchToggleButton}" x:Name="SelectJogOrPTPButton"
               materialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green"
-              materialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Green">
-                                        </ToggleButton>
+              materialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Green"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="16" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -404,12 +402,12 @@
 
                                         <Button Background="Green" x:Name="Axis0PTPButton"  Click="Axis0PTPButton_Click"
                                              materialDesign:ButtonAssist.CornerRadius="10" Style="{StaticResource MaterialDesignRaisedButton}">
-                                            <TextBlock Text="PTP"  FontSize="15" TextWrapping="Wrap" TextAlignment="Center"/>
                                             <Button.Visibility>
                                                 <MultiBinding Converter="{StaticResource MultiBool2VisibleConveter}">
                                                     <Binding ElementName="SelectJogOrPTPButton" Path="IsChecked"/>
                                                 </MultiBinding>
                                             </Button.Visibility>
+                                            <TextBlock Text="PTP"  FontSize="15" TextWrapping="Wrap" TextAlignment="Center"/>
                                         </Button>
 
                                         <Button x:Name="Axis0JogNegative" Click="Axis0JogNegative_Click"
@@ -438,12 +436,12 @@
 
                                         <Button Background="Green" x:Name="Axis1PTPButton"  Click="Axis1PTPButton_Click"
          materialDesign:ButtonAssist.CornerRadius="10" Style="{StaticResource MaterialDesignRaisedButton}">
-                                            <TextBlock Text="PTP"  FontSize="15" TextWrapping="Wrap" TextAlignment="Center"/>
                                             <Button.Visibility>
                                                 <MultiBinding Converter="{StaticResource MultiBool2VisibleConveter}">
                                                     <Binding ElementName="SelectJogOrPTPButton" Path="IsChecked"/>
                                                 </MultiBinding>
                                             </Button.Visibility>
+                                            <TextBlock Text="PTP"  FontSize="15" TextWrapping="Wrap" TextAlignment="Center"/>
                                         </Button>
 
                                         <Button x:Name="Axis1JogNegative" Click="Axis1JogNegative_Click"
@@ -472,12 +470,12 @@
 
                                         <Button Background="Green"  x:Name="Axis2PTPButton"  Click="Axis2PTPButton_Click"
          materialDesign:ButtonAssist.CornerRadius="10" Style="{StaticResource MaterialDesignRaisedButton}">
-                                            <TextBlock Text="PTP"  FontSize="15" TextWrapping="Wrap" TextAlignment="Center"/>
                                             <Button.Visibility>
                                                 <MultiBinding Converter="{StaticResource MultiBool2VisibleConveter}">
                                                     <Binding ElementName="SelectJogOrPTPButton" Path="IsChecked"/>
                                                 </MultiBinding>
                                             </Button.Visibility>
+                                            <TextBlock Text="PTP"  FontSize="15" TextWrapping="Wrap" TextAlignment="Center"/>
                                         </Button>
 
                                         <Button x:Name="Axis2JogNegative" Click="Axis2JogNegative_Click"
@@ -512,12 +510,12 @@ materialDesign:ButtonAssist.CornerRadius="10" Style="{StaticResource MaterialDes
                     <Grid>
                         <Label FontSize="16" FontWeight="Bold"
 Content="Ip" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Width="37" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False"/>
-                        <TextBox x:Name="IpOfIPGLaser" IsEnabled="{Binding ElementName=ConnectedIPGLaserButton,Path=IsChecked,Converter={StaticResource BooleanNegationConverter}}" BorderBrush="Black" BorderThickness="1"
+                        <TextBox x:Name="IpOfIPGLaser" IsEnabled="{Binding IsChecked, Converter={StaticResource BooleanNegationConverter}, ElementName=ConnectedIPGLaserButton}" BorderBrush="Black" BorderThickness="1"
                          HorizontalAlignment="Left" Margin="52,29,0,0" TextWrapping="Wrap" Text="192.168.3.230" VerticalAlignment="Top" Width="105" Height="28" TextAlignment="Center"/>
 
                         <Label FontSize="16" FontWeight="Bold"
 Content="port" HorizontalAlignment="Left" Margin="168,28,0,0" VerticalAlignment="Top" Width="51" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False"/>
-                        <TextBox x:Name="PortOfIPGLaser"  BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding ElementName=ConnectedIPGLaserButton,Path=IsChecked,Converter={StaticResource BooleanNegationConverter}}"  HorizontalAlignment="Left" Margin="224,29,0,0" TextWrapping="Wrap" Text="10001" VerticalAlignment="Top" Width="63" Height="28" TextAlignment="Center"/>
+                        <TextBox x:Name="PortOfIPGLaser"  BorderBrush="Black" BorderThickness="1" IsEnabled="{Binding IsChecked, Converter={StaticResource BooleanNegationConverter}, ElementName=ConnectedIPGLaserButton}"  HorizontalAlignment="Left" Margin="224,29,0,0" TextWrapping="Wrap" Text="10001" VerticalAlignment="Top" Width="63" Height="28" TextAlignment="Center"/>
                         <ToggleButton x:Name="ConnectedIPGLaserButton" Click="ConnectedIPGLaserButton_Click" Style="{StaticResource MaterialDesignSwitchToggleButton}"  IsChecked="False"
  materialDesign:ToggleButtonAssist.SwitchTrackOnBackground="Green" 
 materialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red"
@@ -534,19 +532,19 @@ materialDesign:ToggleButtonAssist.SwitchTrackOffBackground="Red"
 
                         <Label FontSize="16" FontWeight="Bold"
 Content="Pulse Frequency" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Width="142" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False"/>
-                        <TextBox x:Name="PulseFrequency" TextChanged="PulseFrequency_TextChanged" IsEnabled="{Binding ElementName=ConnectedIPGLaserButton,Path=IsChecked}"  BorderBrush="Black" BorderThickness="1"
-                         HorizontalAlignment="Left" Margin="157,69,0,0" TextWrapping="Wrap" Text="{Binding PulseFrequency,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:F1}}" VerticalAlignment="Top" Width="105" Height="28" TextAlignment="Center"/>
+                        <TextBox x:Name="PulseFrequency" TextChanged="PulseFrequency_TextChanged" IsEnabled="{Binding IsChecked, ElementName=ConnectedIPGLaserButton}"  BorderBrush="Black" BorderThickness="1"
+                         HorizontalAlignment="Left" Margin="157,69,0,0" TextWrapping="Wrap" Text="{Binding PulseFrequency, Mode=TwoWay, StringFormat=\{0:F1\}, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="105" Height="28" TextAlignment="Center"/>
 
                         <Label FontSize="16" FontWeight="Bold"
 Content="Pulse Width" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Width="142" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False"/>
-                        <TextBox x:Name="PulseWidth" TextChanged="PulseWidth_TextChanged" IsEnabled="{Binding ElementName=ConnectedIPGLaserButton,Path=IsChecked}"  BorderBrush="Black" BorderThickness="1"
-                         HorizontalAlignment="Left" Margin="157,103,0,0" TextWrapping="Wrap" Text="{Binding PulseWidth,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:F1}}" VerticalAlignment="Top" Width="105" Height="28" TextAlignment="Center"/>
+                        <TextBox x:Name="PulseWidth" TextChanged="PulseWidth_TextChanged" IsEnabled="{Binding IsChecked, ElementName=ConnectedIPGLaserButton}"  BorderBrush="Black" BorderThickness="1"
+                         HorizontalAlignment="Left" Margin="157,103,0,0" TextWrapping="Wrap" Text="{Binding PulseWidth, Mode=TwoWay, StringFormat=\{0:F1\}, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="105" Height="28" TextAlignment="Center"/>
 
                         <Label FontSize="16" FontWeight="Bold"
 Content="Diode Current" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top" Width="142" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False"/>
-                        <TextBox x:Name="DiodeCurrent" TextChanged="DiodeCurrent_TextChanged" IsEnabled="{Binding ElementName=ConnectedIPGLaserButton,Path=IsChecked}"  BorderBrush="Black" BorderThickness="1"
- HorizontalAlignment="Left" Margin="390,139,0,0" TextWrapping="Wrap" Text="{Binding DiodeCurrent,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:F1}}" VerticalAlignment="Top" Width="104" Height="28" TextAlignment="Center"/>
-                        <Slider Maximum="150" x:Name="DiodeCurrentSlider" Minimum="0" Value="{Binding DiodeCurrent,Mode=TwoWay,StringFormat={}{0:F1}}" Margin="157,142,1553,791" IsEnabled="{Binding ElementName=ConnectedIPGLaserButton,Path=IsChecked}"/>
+                        <TextBox x:Name="DiodeCurrent" TextChanged="DiodeCurrent_TextChanged" IsEnabled="{Binding IsChecked, ElementName=ConnectedIPGLaserButton}"  BorderBrush="Black" BorderThickness="1"
+ HorizontalAlignment="Left" Margin="390,139,0,0" TextWrapping="Wrap" Text="{Binding DiodeCurrent, Mode=TwoWay, StringFormat=\{0:F1\}, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="104" Height="28" TextAlignment="Center"/>
+                        <Slider Maximum="150" x:Name="DiodeCurrentSlider" Minimum="0" Value="{Binding DiodeCurrent, Mode=TwoWay, StringFormat=\{0:F1\}}" Margin="157,142,1553,791" IsEnabled="{Binding IsChecked, ElementName=ConnectedIPGLaserButton}"/>
 
                         <GroupBox Margin="557,0,5,0" Header="IO Control" x:Name="group1">
                             <Grid>
@@ -609,10 +607,10 @@ Content="Diode Current" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalA
 
                                             <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1"  x:Name="Border1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}"
-                                                    Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-                                                    Height="{Binding ElementName=Border1,Path=ActualHeight}"
-                                                    CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}"
+                                                    Width="{Binding ActualHeight, ElementName=Border1}" 
+                                                    Height="{Binding ActualHeight, ElementName=Border1}"
+                                                    CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="Emergency" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -620,10 +618,10 @@ Content="Diode Current" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalA
 
                                             <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding SafetyDoor,Converter={StaticResource ColorToBooleanConverter}}"
-        Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-        Height="{Binding ElementName=Border1,Path=ActualHeight}"
-        CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding SafetyDoor, Converter={StaticResource ColorToBooleanConverter}}"
+        Width="{Binding ActualHeight, ElementName=Border1}" 
+        Height="{Binding ActualHeight, ElementName=Border1}"
+        CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="SafetyDoor" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -631,10 +629,10 @@ Content="Diode Current" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalA
 
                                             <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding StartButton,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding StartButton, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="StartButton" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -642,10 +640,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="3" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding StopButton,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding StopButton, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="StopButton" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -653,10 +651,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="4" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding ResetButton,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding ResetButton, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="ResetButton" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -664,10 +662,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="5" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding LaserReady,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding LaserReady, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="LaserReady" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -675,10 +673,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="6" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding ClampingCylOpen,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding ClampingCylOpen, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="ClampingCylOpen" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -686,10 +684,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="7" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding ClampingCylClose,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding ClampingCylClose, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="ClampingCylClose" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -697,10 +695,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="8" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding SlidingCylOpen,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding SlidingCylOpen, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="SlidingCylOpen" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -708,10 +706,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="9" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding SlidingCylClose,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding SlidingCylClose, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="SlidingCylClose" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -719,10 +717,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="10" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding StopperCyl1Open,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding StopperCyl1Open, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="StopperCyl1Open" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -730,10 +728,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="11" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding StopperCyl1Close,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding StopperCyl1Close, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="StopperCyl1Close" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -741,10 +739,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="12" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding StopperCyl2Open,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding StopperCyl2Open, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="StopperCyl2Open" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -752,10 +750,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="13" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding StopperCyl2Close,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding StopperCyl2Close, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="StopperCyl2Close" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -763,10 +761,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="14" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding StopperCyl3Open,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding StopperCyl3Open, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="StopperCyl3Open" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -774,10 +772,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="15" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding StopperCyl3Close,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding StopperCyl3Close, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="StopperCyl3Close" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -811,12 +809,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding GATE,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding GATE, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}" x:Name="GATE" Click="GATE_Click"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}" x:Name="GATE" Click="GATE_Click"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="GATE"  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -830,12 +828,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding ClampingCylFwd,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding ClampingCylFwd, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}" x:Name="ClampingCylFwd" Click="ClampingCylFwd_Click"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}" x:Name="ClampingCylFwd" Click="ClampingCylFwd_Click"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="ClampingCylFwd"  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -849,12 +847,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding SlidingCylFwd,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding SlidingCylFwd, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}" x:Name="SlidingCylFwd" Click="SlidingCylFwd_Click"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}" x:Name="SlidingCylFwd" Click="SlidingCylFwd_Click"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="SlidingCylFwd"  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -868,12 +866,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding SlidingCylBwd,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding SlidingCylBwd, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}" x:Name="SlidingCylBwd" Click="SlidingCylBwd_Click"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}" x:Name="SlidingCylBwd" Click="SlidingCylBwd_Click"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="SlidingCylBwd"  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -887,12 +885,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding StopperCyl1Fwd,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding StopperCyl1Fwd, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}" x:Name="StopperCyl1Fwd" Click="StopperCyl1Fwd_Click"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}" x:Name="StopperCyl1Fwd" Click="StopperCyl1Fwd_Click"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="StopperCyl1Fwd"  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -906,12 +904,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding StopperCyl23Fwd,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding StopperCyl23Fwd, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}" x:Name="StopperCyl23Fwd" Click="StopperCyl23Fwd_Click"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}" x:Name="StopperCyl23Fwd" Click="StopperCyl23Fwd_Click"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="StopperCyl23Fwd"  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -925,12 +923,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -944,12 +942,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -963,12 +961,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -982,12 +980,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1001,12 +999,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1020,12 +1018,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1039,12 +1037,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1058,12 +1056,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1077,12 +1075,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1096,12 +1094,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1165,10 +1163,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding CDAPressureSwitch,Converter={StaticResource ColorToBooleanConverter}}"
-                                                    Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-                                                    Height="{Binding ElementName=Border1,Path=ActualHeight}"
-                                                    CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding CDAPressureSwitch, Converter={StaticResource ColorToBooleanConverter}}"
+                                                    Width="{Binding ActualHeight, ElementName=Border1}" 
+                                                    Height="{Binding ActualHeight, ElementName=Border1}"
+                                                    CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="CDAPressureSwitch" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1176,10 +1174,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding ClampAirPresSwitch,Converter={StaticResource ColorToBooleanConverter}}"
-        Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-        Height="{Binding ElementName=Border1,Path=ActualHeight}"
-        CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding ClampAirPresSwitch, Converter={StaticResource ColorToBooleanConverter}}"
+        Width="{Binding ActualHeight, ElementName=Border1}" 
+        Height="{Binding ActualHeight, ElementName=Border1}"
+        CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="ClampAirPresSwitch" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1187,10 +1185,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding PositionInput1,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding PositionInput1, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="PositionInput1" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1198,10 +1196,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="3" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding PositionInput2,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding PositionInput2, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="PositionInput2" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1209,10 +1207,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="4" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding PositionInput3,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding PositionInput3, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="PositionInput3" FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1220,10 +1218,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="5" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding LaserReady,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding LaserReady, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="N.A." FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1231,10 +1229,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="6" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding ClampingCylOpen,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding ClampingCylOpen, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="N.A." FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1242,10 +1240,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="7" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding ClampingCylClose,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding ClampingCylClose, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="N.A." FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1253,10 +1251,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="8" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding SlidingCylOpen,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding SlidingCylOpen, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="N.A." FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1264,10 +1262,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="9" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding SlidingCylClose,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding SlidingCylClose, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="N.A." FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1275,10 +1273,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="10" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding StopperCyl1Open,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding StopperCyl1Open, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="N.A." FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1286,10 +1284,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="11" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding StopperCyl1Close,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding StopperCyl1Close, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="N.A." FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1297,10 +1295,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="12" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding StopperCyl2Open,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding StopperCyl2Open, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="N.A." FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1308,10 +1306,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="13" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding StopperCyl2Close,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding StopperCyl2Close, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="N.A." FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1319,10 +1317,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="14" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding StopperCyl3Open,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding StopperCyl3Open, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="N.A." FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1330,10 +1328,10 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
 
                                             <Border Grid.Row="15" BorderBrush="Black" BorderThickness="1">
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Border Background="{Binding StopperCyl3Close,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Background="{Binding StopperCyl3Close, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Width="30"/>
                                                     <TextBlock Text="N.A." FontSize="25" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1367,12 +1365,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Tower_G,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Tower_G, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}" x:Name="Tower_G" Click="Tower_G_Click"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}" x:Name="Tower_G" Click="Tower_G_Click"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="Tower_G"  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1386,12 +1384,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Tower_R,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Tower_R, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}" x:Name="Tower_R" Click="Tower_R_Click"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}" x:Name="Tower_R" Click="Tower_R_Click"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="Tower_R"  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1405,12 +1403,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Tower_A,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Tower_A, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"  x:Name="Tower_A" Click="Tower_A_Click"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"  x:Name="Tower_A" Click="Tower_A_Click"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="Tower_A"  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1424,12 +1422,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding TowerBuzzer,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding TowerBuzzer, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"  x:Name="TowerBuzzer" Click="TowerBuzzer_Click"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"  x:Name="TowerBuzzer" Click="TowerBuzzer_Click"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="TowerBuzzer"  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1443,12 +1441,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding LightController,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding LightController, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}" x:Name="LightController" Click="LightController_Click"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}" x:Name="LightController" Click="LightController_Click"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="LightController"  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1462,12 +1460,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding PowerSupDischarge,Converter={StaticResource ColorToBooleanConverter}}"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding PowerSupDischarge, Converter={StaticResource ColorToBooleanConverter}}"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}" x:Name="PowerSupDischarge" Click="PowerSupDischarge_Click"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}" x:Name="PowerSupDischarge" Click="PowerSupDischarge_Click"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="PowerSupDischarge"  FontSize="20" TextAlignment="Center" TextWrapping="Wrap"/>
                                                     </Button>
@@ -1481,12 +1479,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1500,12 +1498,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1519,12 +1517,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1538,12 +1536,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1557,12 +1555,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1576,12 +1574,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1595,12 +1593,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1614,12 +1612,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1633,12 +1631,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1652,12 +1650,12 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Background="{Binding Emergency,Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
-Width="{Binding ElementName=Border1,Path=ActualHeight}" 
-Height="{Binding ElementName=Border1,Path=ActualHeight}"
-CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticResource ValueHalf}}"/>
+                                                    <Border Grid.Column="0" Background="{Binding Emergency, Converter={StaticResource ColorToBooleanConverter}}" Visibility="Hidden"
+Width="{Binding ActualHeight, ElementName=Border1}" 
+Height="{Binding ActualHeight, ElementName=Border1}"
+CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, ElementName=Border1}"/>
                                                     <TextBlock Grid.Column="1" Width="30"/>
-                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ElementName=Border1,Path=ActualHeight}"
+                                                    <Button Background="Green" Grid.Column="2" Height="{Binding ActualHeight, ElementName=Border1}"
      materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,0,5,0">
                                                         <TextBlock Text="N.A."  FontSize="25" TextAlignment="Center"/>
                                                     </Button>
@@ -1675,9 +1673,7 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                     <Grid>
                         <Grid Margin="1,1,400,1">
                             <Border  BorderBrush="Black" BorderThickness="1">
-                                <Canvas ClipToBounds="True" x:Name="CanvasDXF" Background="White"
-                                    MouseLeftButtonDown="CanvasDXF_MouseLeftButtonDown" MouseMove="CanvasDXF_MouseMove" MouseLeftButtonUp="CanvasDXF_MouseLeftButtonUp">
-                                </Canvas>
+                                <Canvas ClipToBounds="True" x:Name="CanvasDXF" Background="White"/>
                             </Border>
                         </Grid>
 
@@ -1696,43 +1692,43 @@ CornerRadius="{Binding ElementName=Border1,Path=ActualHeight,Converter={StaticRe
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Button Grid.Row="0" Grid.Column="0" x:Name="LineScan" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="0" Click="DrawingButton_Click">
+                                    <Button Grid.Row="0" Grid.Column="0" x:Name="LineScan" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="0">
                                         <materialDesign:PackIcon Kind="LineScan"/>
                                     </Button>
 
-                                    <Button Grid.Row="0" Grid.Column="1" x:Name="SquareOutline" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="1" Click="DrawingButton_Click">
+                                    <Button Grid.Row="0" Grid.Column="1" x:Name="SquareOutline" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="1">
                                         <materialDesign:PackIcon Kind="SquareOutline"/>
                                     </Button>
 
-                                    <Button Grid.Row="0" Grid.Column="2" x:Name="CircleOutline"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="2" Click="DrawingButton_Click">
+                                    <Button Grid.Row="0" Grid.Column="2" x:Name="CircleOutline"  Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="2">
                                         <materialDesign:PackIcon Kind="CircleOutline"/>
                                     </Button>
 
-                                    <Button Grid.Row="0" Grid.Column="3" x:Name="TriangleOutline"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="3" Click="DrawingButton_Click">
+                                    <Button Grid.Row="0" Grid.Column="3" x:Name="TriangleOutline"  Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="3">
                                         <materialDesign:PackIcon Kind="TriangleOutline"/>
                                     </Button>
 
-                                    <Button Grid.Row="0" Grid.Column="4" x:Name="TriangleWave"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="4" Click="DrawingButton_Click">
+                                    <Button Grid.Row="0" Grid.Column="4" x:Name="BrokenLine"  Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="4">
                                         <materialDesign:PackIcon Kind="TriangleWave" />
                                     </Button>
 
-                                    <Button Grid.Row="1" Grid.Column="0" x:Name="EllipseOutline"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="5" Click="DrawingButton_Click">
+                                    <Button Grid.Row="1" Grid.Column="0" x:Name="EllipseOutline"  Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="5">
                                         <materialDesign:PackIcon Kind="EllipseOutline" />
                                     </Button>
 
-                                    <Button Grid.Row="1" Grid.Column="1" x:Name="SquareRoundedOutline"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="6" Click="DrawingButton_Click">
+                                    <Button Grid.Row="1" Grid.Column="1" x:Name="SquareRoundedOutline"  Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="6">
                                         <materialDesign:PackIcon Kind="SquareRoundedOutline" />
                                     </Button>
 
-                                    <Button Grid.Row="1" Grid.Column="2" x:Name="Barcode"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="7" Click="DrawingButton_Click">
+                                    <Button Grid.Row="1" Grid.Column="2" x:Name="Barcode"  Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="7">
                                         <materialDesign:PackIcon Kind="Barcode" />
                                     </Button>
 
-                                    <Button Grid.Row="1" Grid.Column="3" x:Name="FormatTextVariantOutline"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="8" Click="DrawingButton_Click">
+                                    <Button Grid.Row="1" Grid.Column="3" x:Name="FormatTextVariantOutline"  Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="8">
                                         <materialDesign:PackIcon Kind="FormatTextVariantOutline" />
                                     </Button>
 
-                                    <Button Grid.Row="1" Grid.Column="4" x:Name="Image"  Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="{Binding IsDrawing,Converter={StaticResource BooleanNegationConverter}}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="9" Click="DrawingButton_Click">
+                                    <Button Grid.Row="1" Grid.Column="4" x:Name="Image"  Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5,0,5,0" Tag="9">
                                         <materialDesign:PackIcon Kind="Image" />
                                     </Button>
                                 </Grid>

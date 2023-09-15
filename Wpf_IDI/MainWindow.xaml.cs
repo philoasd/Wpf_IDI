@@ -4,21 +4,21 @@ using Microsoft.Win32;
 using MotorManager;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Brushes = System.Windows.Media.Brushes;
 using IOControl;
 using Automation.BDaq;
 using LaserControlManager;
-using System.Net.WebSockets;
 using System.Threading;
 using System.Windows.Shapes;
 using System.Windows.Input;
+using XDrawerLib;
+using XDrawerLib.Drawers;
+using XDrawerLib.Helpers;
 
 namespace Wpf_IDI
 {
@@ -38,9 +38,13 @@ namespace Wpf_IDI
 
             GetCameraInfo(); // 获取相机参数
             LoadCameraCalibrationParameters(ParametersManager.GetPatameteName(ParametersManager.PName.Calibration)); // 加载标定参数
+
             LoadSpiiTcpIPAndPort(ParametersManager.GetPatameteName(ParametersManager.PName.SpiiTcp)); // 加载spii的tcp参数
+
             InitIO();
             UpdateIO();
+
+            InitDrawing();
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -1648,12 +1652,14 @@ namespace Wpf_IDI
 
         #region 画图参数
         private Point startPoint; // 起始点
+        public Drawer Drawer;
 
         /// <summary>
         /// 画图模式
         /// </summary>
         private enum DrawingMode
         {
+            None,// 无
             Line,// 直线
             Rectangle,// 矩形
             Circle,// 圆
@@ -1681,347 +1687,400 @@ namespace Wpf_IDI
         Path path;
 
         #endregion
-        /// <summary>
-        /// 点击画图按钮，修改画图模式
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DrawingButton_Click(object sender, RoutedEventArgs e)
+
+        private void InitDrawing()
         {
-            Button button = (Button)sender;
-            switch (int.Parse((string)button.Tag))
+            Drawer = new Drawer(this.CanvasDXF);
+            Drawer.ContinuousDraw = false;
+
+            this.LineScan.Click += delegate (object sender, RoutedEventArgs e)
             {
-                case 0:
-                    {
-                        _DrawingMode = DrawingMode.Line;
-                        break;
-                    }
-                case 1:
-                    {
-                        _DrawingMode = DrawingMode.Rectangle;
-                        break;
-                    }
-                case 2:
-                    {
-                        _DrawingMode = DrawingMode.Circle;
-                        break;
-                    }
-                case 3:
-                    {
-                        _DrawingMode = DrawingMode.Triangle;
-                        break;
-                    }
-                case 4:
-                    {
-                        _DrawingMode = DrawingMode.BrokenLine;
-                        break;
-                    }
-                case 5:
-                    {
-                        _DrawingMode = DrawingMode.Ellipse;
-                        break;
-                    }
-                case 6:
-                    {
-                        _DrawingMode = DrawingMode.SquareRounded;
-                        break;
-                    }
-                case 7:
-                    {
-                        _DrawingMode = DrawingMode.Barcode;
-                        break;
-                    }
-                case 8:
-                    {
-                        _DrawingMode = DrawingMode.Text;
-                        break;
-                    }
-                case 9:
-                    {
-                        _DrawingMode = DrawingMode.Image;
-                        break;
-                    }
-            }
-
-
-        }
-
-        private void CanvasDXF_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (_ParametersData.IsDrawing)
-            {
-                Point endPoint = e.GetPosition(this.CanvasDXF);
-                double width = Math.Abs(endPoint.X - startPoint.X);
-                double height = Math.Abs(endPoint.Y - startPoint.Y);
-
-                switch (_DrawingMode)
-                {
-                    case DrawingMode.Line:
-                        {
-                            path.Data = new LineGeometry(startPoint, endPoint);
-                            break;
-                        }
-                    case DrawingMode.Rectangle:
-                        {
-                            if (endPoint.X < startPoint.X)
-                            {
-                                Canvas.SetLeft(_Rectangle, endPoint.X);
-                            }
-                            if (endPoint.Y < startPoint.Y)
-                            {
-                                Canvas.SetTop(_Rectangle, endPoint.Y);
-                            }
-                            _Rectangle.Width = width;
-                            _Rectangle.Height = height;
-                            break;
-                        }
-                    case DrawingMode.Circle:
-                        {
-                            if (endPoint.X < startPoint.X)
-                            {
-                                Canvas.SetLeft(_Circle, endPoint.X);
-                            }
-                            if (endPoint.Y < startPoint.Y)
-                            {
-                                Canvas.SetTop(_Circle, endPoint.Y);
-                            }
-                            _Circle.Width = width;
-                            _Circle.Height = width;
-                            break;
-                        }
-                    case DrawingMode.Triangle:
-                        {
-                            if (endPoint.X < startPoint.X)
-                            {
-                                Canvas.SetLeft(_Triangle, endPoint.X);
-                            }
-                            if (endPoint.Y < startPoint.Y)
-                            {
-                                Canvas.SetTop(_Triangle, endPoint.Y);
-                            }
-                            _Triangle.Points = new PointCollection()
-                            {
-                                new Point(width / 2, 0),
-                                new Point(0, height),
-                                new Point(width, height),
-                            };
-                            break;
-                        }
-                    case DrawingMode.BrokenLine:
-                        {
-                            break;
-                        }
-                    case DrawingMode.Ellipse:
-                        {
-                            if (endPoint.X < startPoint.X)
-                            {
-                                Canvas.SetLeft(_Ellipse, endPoint.X);
-                            }
-                            if (endPoint.Y < startPoint.Y)
-                            {
-                                Canvas.SetTop(_Ellipse, endPoint.Y);
-                            }
-                            _Ellipse.Width = width;
-                            _Ellipse.Height = height;
-                            break;
-                        }
-                    case DrawingMode.SquareRounded:
-                        {
-                            if (endPoint.X < startPoint.X)
-                            {
-                                Canvas.SetLeft(_SquareRounded, endPoint.X);
-                            }
-                            if (endPoint.Y < startPoint.Y)
-                            {
-                                Canvas.SetTop(_SquareRounded, endPoint.Y);
-                            }
-                            _SquareRounded.Width = width;
-                            _SquareRounded.Height = height;
-                            _SquareRounded.RadiusX = width / 10;
-                            _SquareRounded.RadiusY = width / 10;
-                            break;
-                        }
-                }
-
-            }
-        }
-
-        private void CanvasDXF_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (_ParametersData.IsDrawing)
-            {
-                _ParametersData.IsDrawing = false;
-                return;
-            }
-            _ParametersData.IsDrawing = true;
-
-            startPoint = e.GetPosition(this.CanvasDXF);
-
-            LineGeometry lineGeometry = new LineGeometry()
-            {
-                StartPoint = startPoint,
-                EndPoint = startPoint,
+                Drawer.DrawTool = Tool.Line;
             };
-            path = new Path()
+            this.SquareOutline.Click += delegate (object sender, RoutedEventArgs e)
             {
-                Stroke = Brushes.Black,
-                StrokeThickness = 1,
-                Data = lineGeometry,
+                Drawer.DrawTool = Tool.Rectangle;
             };
-
-            switch (_DrawingMode)
+            this.CircleOutline.Click += delegate (object sender, RoutedEventArgs e)
             {
-                case DrawingMode.Line:
-                    {
-                        this.CanvasDXF.Children.Add(path);
-                        break;
-                    }
-                case DrawingMode.Rectangle:
-                    {
-                        _Rectangle = new Rectangle()
-                        {
-                            Stroke = Brushes.Black,
-                            StrokeThickness = 1,
-                            //Fill = Brushes.Transparent,
-                        };
-                        Canvas.SetLeft(_Rectangle, startPoint.X);
-                        Canvas.SetTop(_Rectangle, startPoint.Y);
-                        this.CanvasDXF.Children.Add(_Rectangle);
-                        break;
-                    }
-                case DrawingMode.Circle:
-                    {
-                        _Circle = new Ellipse()
-                        {
-                            Stroke = Brushes.Black,
-                            StrokeThickness = 1,
-                        };
-                        Canvas.SetLeft(_Circle, startPoint.X);
-                        Canvas.SetTop(_Circle, startPoint.Y);
-                        this.CanvasDXF.Children.Add(_Circle);
-                        break;
-                    }
-                case DrawingMode.Triangle:
-                    {
-                        _Triangle = new Polygon()
-                        {
-                            Stroke = Brushes.Black,
-                            StrokeThickness = 1,
-                        };
-                        Canvas.SetLeft(_Triangle, startPoint.X);
-                        Canvas.SetTop(_Triangle, startPoint.Y);
-                        this.CanvasDXF.Children.Add(_Triangle);
-                        break;
-                    }
-                case DrawingMode.BrokenLine:
-                    {
-                        _BrokenLine = new Polygon()
-                        {
-                            Stroke = Brushes.Black,
-                            StrokeThickness = 1,
-                        };
-                        Canvas.SetLeft(_BrokenLine, startPoint.X);
-                        Canvas.SetTop(_BrokenLine, startPoint.Y);
-                        this.CanvasDXF.Children.Add(_BrokenLine);
-                        break;
-                    }
-                case DrawingMode.Ellipse:
-                    {
-                        _Ellipse = new Ellipse()
-                        {
-                            Stroke = Brushes.Black,
-                            StrokeThickness = 1,
-                        };
-                        Canvas.SetLeft(_Ellipse, startPoint.X);
-                        Canvas.SetTop(_Ellipse, startPoint.Y);
-                        this.CanvasDXF.Children.Add(_Ellipse);
-                        break;
-                    }
-                case DrawingMode.SquareRounded:
-                    {
-                        _SquareRounded = new Rectangle()
-                        {
-                            Stroke = Brushes.Black,
-                            StrokeThickness = 1,
-                        };
-                        Canvas.SetLeft(_SquareRounded, startPoint.X);
-                        Canvas.SetTop(_SquareRounded, startPoint.Y);
-                        this.CanvasDXF.Children.Add(_SquareRounded);
-                        break;
-                    }
-                case DrawingMode.Barcode:
-                    {
-
-                        break;
-                    }
-                case DrawingMode.Text:
-                    {
-                        break;
-                    }
-                case DrawingMode.Image:
-                    {
-                        break;
-                    }
-            }
-
-            
+                //Drawer.DrawTool = Tool.Circle;
+            };
+            this.TriangleOutline.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                Drawer.DrawTool = Tool.Triangle;
+            };
+            this.BrokenLine.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                //Drawer.DrawTool = Tool.BrokenLine;
+            };
+            this.EllipseOutline.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                Drawer.DrawTool = Tool.Ellipse;
+            };
+            this.SquareRoundedOutline.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                //Drawer.DrawTool = Tool.SquareRounded;
+            };
+            this.Barcode.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                //Drawer.DrawTool = Tool.Barcode;
+            };
+            this.FormatTextVariantOutline.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                Drawer.DrawTool = Tool.Text;
+            };
+            this.Image.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                //Drawer.DrawTool = Tool.Image;
+            };
         }
 
-        private void CanvasDXF_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            //_ParametersData.IsDrawing = false;
-            return;
-            switch (_DrawingMode)
-            {
-                case DrawingMode.Line:
-                    {
-                        _Line = null;
-                        break;
-                    }
-                case DrawingMode.Rectangle:
-                    {
-                        _Rectangle = null;
-                        break;
-                    }
-                case DrawingMode.Circle:
-                    {
-                        _Circle = null;
-                        break;
-                    }
-                case DrawingMode.Triangle:
-                    {
-                        _Triangle = null;
-                        break;
-                    }
-                case DrawingMode.BrokenLine:
-                    {
-                        //_BrokenLine = null;
-                        break;
-                    }
-                case DrawingMode.Ellipse:
-                    {
-                        _Ellipse = null;
-                        break;
-                    }
-                case DrawingMode.SquareRounded:
-                    {
-                        _SquareRounded = null;
-                        break;
-                    }
-                case DrawingMode.Barcode:
-                    {
-                        break;
-                    }
-                case DrawingMode.Text:
-                    {
-                        break;
-                    }
-                case DrawingMode.Image:
-                    {
-                        break;
-                    }
-            }
-        }
+
+        ///// <summary>
+        ///// 点击画图按钮，修改画图模式
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void DrawingButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Button button = (Button)sender;
+        //    switch (int.Parse((string)button.Tag))
+        //    {
+        //        case 0:
+        //            {
+        //                _DrawingMode = DrawingMode.Line;
+        //                break;
+        //            }
+        //        case 1:
+        //            {
+        //                _DrawingMode = DrawingMode.Rectangle;
+        //                break;
+        //            }
+        //        case 2:
+        //            {
+        //                _DrawingMode = DrawingMode.Circle;
+        //                break;
+        //            }
+        //        case 3:
+        //            {
+        //                _DrawingMode = DrawingMode.Triangle;
+        //                break;
+        //            }
+        //        case 4:
+        //            {
+        //                _DrawingMode = DrawingMode.BrokenLine;
+        //                break;
+        //            }
+        //        case 5:
+        //            {
+        //                _DrawingMode = DrawingMode.Ellipse;
+        //                break;
+        //            }
+        //        case 6:
+        //            {
+        //                _DrawingMode = DrawingMode.SquareRounded;
+        //                break;
+        //            }
+        //        case 7:
+        //            {
+        //                _DrawingMode = DrawingMode.Barcode;
+        //                break;
+        //            }
+        //        case 8:
+        //            {
+        //                _DrawingMode = DrawingMode.Text;
+        //                break;
+        //            }
+        //        case 9:
+        //            {
+        //                _DrawingMode = DrawingMode.Image;
+        //                break;
+        //            }
+        //    }
+
+
+        //}
+
+        //private void CanvasDXF_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    if (_ParametersData.IsDrawing)
+        //    {
+        //        Point endPoint = e.GetPosition(this.CanvasDXF);
+        //        double width = Math.Abs(endPoint.X - startPoint.X);
+        //        double height = Math.Abs(endPoint.Y - startPoint.Y);
+
+        //        switch (_DrawingMode)
+        //        {
+        //            case DrawingMode.Line:
+        //                {
+        //                    path.Data = new LineGeometry(startPoint, endPoint);
+        //                    break;
+        //                }
+        //            case DrawingMode.Rectangle:
+        //                {
+        //                    if (endPoint.X < startPoint.X)
+        //                    {
+        //                        Canvas.SetLeft(_Rectangle, endPoint.X);
+        //                    }
+        //                    if (endPoint.Y < startPoint.Y)
+        //                    {
+        //                        Canvas.SetTop(_Rectangle, endPoint.Y);
+        //                    }
+        //                    _Rectangle.Width = width;
+        //                    _Rectangle.Height = height;
+        //                    break;
+        //                }
+        //            case DrawingMode.Circle:
+        //                {
+        //                    if (endPoint.X < startPoint.X)
+        //                    {
+        //                        Canvas.SetLeft(_Circle, endPoint.X);
+        //                    }
+        //                    if (endPoint.Y < startPoint.Y)
+        //                    {
+        //                        Canvas.SetTop(_Circle, endPoint.Y);
+        //                    }
+        //                    _Circle.Width = width;
+        //                    _Circle.Height = width;
+        //                    break;
+        //                }
+        //            case DrawingMode.Triangle:
+        //                {
+        //                    if (endPoint.X < startPoint.X)
+        //                    {
+        //                        Canvas.SetLeft(_Triangle, endPoint.X);
+        //                    }
+        //                    if (endPoint.Y < startPoint.Y)
+        //                    {
+        //                        Canvas.SetTop(_Triangle, endPoint.Y);
+        //                    }
+        //                    _Triangle.Points = new PointCollection()
+        //                    {
+        //                        new Point(width / 2, 0),
+        //                        new Point(0, height),
+        //                        new Point(width, height),
+        //                    };
+        //                    break;
+        //                }
+        //            case DrawingMode.BrokenLine:
+        //                {
+        //                    break;
+        //                }
+        //            case DrawingMode.Ellipse:
+        //                {
+        //                    if (endPoint.X < startPoint.X)
+        //                    {
+        //                        Canvas.SetLeft(_Ellipse, endPoint.X);
+        //                    }
+        //                    if (endPoint.Y < startPoint.Y)
+        //                    {
+        //                        Canvas.SetTop(_Ellipse, endPoint.Y);
+        //                    }
+        //                    _Ellipse.Width = width;
+        //                    _Ellipse.Height = height;
+        //                    break;
+        //                }
+        //            case DrawingMode.SquareRounded:
+        //                {
+        //                    if (endPoint.X < startPoint.X)
+        //                    {
+        //                        Canvas.SetLeft(_SquareRounded, endPoint.X);
+        //                    }
+        //                    if (endPoint.Y < startPoint.Y)
+        //                    {
+        //                        Canvas.SetTop(_SquareRounded, endPoint.Y);
+        //                    }
+        //                    _SquareRounded.Width = width;
+        //                    _SquareRounded.Height = height;
+        //                    _SquareRounded.RadiusX = width / 10;
+        //                    _SquareRounded.RadiusY = width / 10;
+        //                    break;
+        //                }
+        //        }
+
+        //    }
+        //}
+
+        //private void CanvasDXF_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (_ParametersData.IsDrawing)
+        //    {
+        //        _ParametersData.IsDrawing = false;
+        //        return;
+        //    }
+        //    if (DrawingMode.None == _DrawingMode)
+        //    {
+        //        return;
+        //    }
+        //    _ParametersData.IsDrawing = true;
+
+        //    startPoint = e.GetPosition(this.CanvasDXF);
+
+        //    LineGeometry lineGeometry = new LineGeometry()
+        //    {
+        //        StartPoint = startPoint,
+        //        EndPoint = startPoint,
+        //    };
+        //    path = new Path()
+        //    {
+        //        Stroke = Brushes.Black,
+        //        StrokeThickness = 1,
+        //        Data = lineGeometry,
+        //    };
+
+        //    switch (_DrawingMode)
+        //    {
+        //        case DrawingMode.Line:
+        //            {
+        //                this.CanvasDXF.Children.Add(path);
+        //                break;
+        //            }
+        //        case DrawingMode.Rectangle:
+        //            {
+        //                _Rectangle = new Rectangle()
+        //                {
+        //                    Stroke = Brushes.Black,
+        //                    StrokeThickness = 1,
+        //                    //Fill = Brushes.Transparent,
+        //                };
+        //                Canvas.SetLeft(_Rectangle, startPoint.X);
+        //                Canvas.SetTop(_Rectangle, startPoint.Y);
+        //                this.CanvasDXF.Children.Add(_Rectangle);
+        //                break;
+        //            }
+        //        case DrawingMode.Circle:
+        //            {
+        //                _Circle = new Ellipse()
+        //                {
+        //                    Stroke = Brushes.Black,
+        //                    StrokeThickness = 1,
+        //                };
+        //                Canvas.SetLeft(_Circle, startPoint.X);
+        //                Canvas.SetTop(_Circle, startPoint.Y);
+        //                this.CanvasDXF.Children.Add(_Circle);
+        //                break;
+        //            }
+        //        case DrawingMode.Triangle:
+        //            {
+        //                _Triangle = new Polygon()
+        //                {
+        //                    Stroke = Brushes.Black,
+        //                    StrokeThickness = 1,
+        //                };
+        //                Canvas.SetLeft(_Triangle, startPoint.X);
+        //                Canvas.SetTop(_Triangle, startPoint.Y);
+        //                this.CanvasDXF.Children.Add(_Triangle);
+        //                break;
+        //            }
+        //        case DrawingMode.BrokenLine:
+        //            {
+        //                _BrokenLine = new Polygon()
+        //                {
+        //                    Stroke = Brushes.Black,
+        //                    StrokeThickness = 1,
+        //                };
+        //                Canvas.SetLeft(_BrokenLine, startPoint.X);
+        //                Canvas.SetTop(_BrokenLine, startPoint.Y);
+        //                this.CanvasDXF.Children.Add(_BrokenLine);
+        //                break;
+        //            }
+        //        case DrawingMode.Ellipse:
+        //            {
+        //                _Ellipse = new Ellipse()
+        //                {
+        //                    Stroke = Brushes.Black,
+        //                    StrokeThickness = 1,
+        //                };
+        //                Canvas.SetLeft(_Ellipse, startPoint.X);
+        //                Canvas.SetTop(_Ellipse, startPoint.Y);
+        //                this.CanvasDXF.Children.Add(_Ellipse);
+        //                break;
+        //            }
+        //        case DrawingMode.SquareRounded:
+        //            {
+        //                _SquareRounded = new Rectangle()
+        //                {
+        //                    Stroke = Brushes.Black,
+        //                    StrokeThickness = 1,
+        //                };
+        //                Canvas.SetLeft(_SquareRounded, startPoint.X);
+        //                Canvas.SetTop(_SquareRounded, startPoint.Y);
+        //                this.CanvasDXF.Children.Add(_SquareRounded);
+        //                break;
+        //            }
+        //        case DrawingMode.Barcode:
+        //            {
+
+        //                break;
+        //            }
+        //        case DrawingMode.Text:
+        //            {
+        //                break;
+        //            }
+        //        case DrawingMode.Image:
+        //            {
+        //                break;
+        //            }
+        //    }
+
+
+        //}
+
+        //private void CanvasDXF_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        //{
+        //    //_ParametersData.IsDrawing = false;
+        //    return;
+        //    switch (_DrawingMode)
+        //    {
+        //        case DrawingMode.Line:
+        //            {
+        //                _Line = null;
+        //                break;
+        //            }
+        //        case DrawingMode.Rectangle:
+        //            {
+        //                _Rectangle = null;
+        //                break;
+        //            }
+        //        case DrawingMode.Circle:
+        //            {
+        //                _Circle = null;
+        //                break;
+        //            }
+        //        case DrawingMode.Triangle:
+        //            {
+        //                _Triangle = null;
+        //                break;
+        //            }
+        //        case DrawingMode.BrokenLine:
+        //            {
+        //                //_BrokenLine = null;
+        //                break;
+        //            }
+        //        case DrawingMode.Ellipse:
+        //            {
+        //                _Ellipse = null;
+        //                break;
+        //            }
+        //        case DrawingMode.SquareRounded:
+        //            {
+        //                _SquareRounded = null;
+        //                break;
+        //            }
+        //        case DrawingMode.Barcode:
+        //            {
+        //                break;
+        //            }
+        //        case DrawingMode.Text:
+        //            {
+        //                break;
+        //            }
+        //        case DrawingMode.Image:
+        //            {
+        //                break;
+        //            }
+        //    }
+        //}
     }
 
     //public class ButtonProfile

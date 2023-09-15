@@ -24,6 +24,7 @@
     <ProjectReference Include="..\IOControl\IOControl.csproj" />
     <ProjectReference Include="..\LaserControlManager\LaserControlManager.csproj" />
     <ProjectReference Include="..\MotorManager\MotorManager.csproj" />
+    <ProjectReference Include="..\XDrawerLib\XDrawerLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>
