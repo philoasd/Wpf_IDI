@@ -7,31 +7,30 @@ using XDrawerLib.Helpers;
 
 namespace XDrawerLib.Drawers
 {
-    public class XRectangle : XShape, IShape
+    public class XCircle : XShape, IShape
     {
-        public Rectangle Drawing;
+        public static Ellipse Drawing;
 
         public void Create(Point e)
         {
             IsDrawing = true;
             StartPoint = e;
 
-            Drawing = new Rectangle();
+            Drawing = new Ellipse();
             Drawing.Fill = StyleHelper.CurrentStyle.Background;
             Drawing.Stroke = StyleHelper.CurrentStyle.Border;
             Drawing.StrokeThickness = StyleHelper.CurrentStyle.BorderSize;
-            Drawing.Uid = Guid.NewGuid().ToString();
             Drawing.Width = 0;
             Drawing.Height = 0;
             Drawing.Opacity = 0.2;
             Drawing.Tag = this;
+            Drawing.Uid = Guid.NewGuid().ToString();
 
             OwnedShape = Drawing;
 
             Style = new DrawerStyle(StyleHelper.CurrentStyle);
-            Drawing.PreviewMouseLeftButtonDown += base.OnSelect;
-            Drawing.PreviewStylusMove += OnErase;
-            //Drawing.PreviewMouseMove += OnEraseTest;
+            Drawing.MouseLeftButtonDown += base.OnSelect;
+            Drawing.StylusDown += OnErase;
 
             Canvas.SetLeft(Drawing, e.X);
             Canvas.SetTop(Drawing, e.Y);
@@ -45,7 +44,7 @@ namespace XDrawerLib.Drawers
             if (!IsDrawing) return;
 
             var diffX = e.X - StartPoint.X;
-            var diffY = e.Y - StartPoint.Y;
+            var diffY = diffX;
             var scaleX = 1;
             var scaleY = 1;
 
@@ -76,7 +75,7 @@ namespace XDrawerLib.Drawers
             }
         }
 
-        public XRectangle(Drawer drawer) : base(drawer)
+        public XCircle(Drawer drawer) : base(drawer)
         {
             Drawer = drawer;
         }

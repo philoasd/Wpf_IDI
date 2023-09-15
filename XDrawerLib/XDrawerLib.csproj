@@ -115,12 +115,14 @@
   <ItemGroup>
     <Compile Include="Drawers\IShape.cs" />
     <Compile Include="Drawers\XArrow.cs" />
+    <Compile Include="Drawers\XCircle.cs" />
     <Compile Include="Drawers\XCustom.cs" />
     <Compile Include="Drawers\XEllipse.cs" />
     <Compile Include="Drawers\XInk.cs" />
     <Compile Include="Drawers\XLine.cs" />
     <Compile Include="Drawers\XRectangle.cs" />
     <Compile Include="Drawers\XShape.cs" />
+    <Compile Include="Drawers\XSquareRounded.cs" />
     <Compile Include="Drawers\XText.cs" />
     <Compile Include="Drawers\XTriangle.cs" />
     <Compile Include="Helpers\AdornerHelper.cs" />

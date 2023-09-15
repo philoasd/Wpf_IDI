@@ -8,16 +8,28 @@ namespace XDrawerLib
         None,
         Selection,
         Ink,
-        Line,
-        Rectangle,
-        Ellipse,
-        Text,
+        //Line,
+        //Rectangle,
+        //Ellipse,
+        //Text,
         MoveResize,
-        Triangle,
+        //Triangle,
         Arrow,
         Custom,
         Highlight,
-        Pan
+        Pan,
+
+        //None,
+        Line,// 直线
+        Rectangle,// 矩形
+        Circle,// 圆
+        Triangle,// 三角形
+        BrokenLine,// 折线
+        Ellipse,// 椭圆
+        SquareRounded,// 圆角矩形
+        Barcode,// 条码
+        Text,// 文本
+        Image,// 图片
     }
 
     public enum KeyFunction

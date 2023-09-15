@@ -187,6 +187,12 @@ namespace XDrawerLib.Helpers
                 Objects.Add(o.Id, o);
                 Objects.Last().Value.ToType<XRectangle>().Create(e);
             }
+            else if (DrawTool == Tool.SquareRounded)
+            {
+                var o = new XSquareRounded(this);
+                Objects.Add(o.Id, o);
+                Objects.Last().Value.ToType<XSquareRounded>().Create(e);
+            }
             else if (DrawTool == Tool.Ellipse)
             {
                 var o = new XEllipse(this);
@@ -233,6 +239,12 @@ namespace XDrawerLib.Helpers
                 Objects.Add(o.Id, o);
                 Objects.Last().Value.ToType<XCustom>().Create(e, CustomShapeData);
             }
+            else if (DrawTool == Tool.Circle)
+            {
+                var o = new XCircle(this);
+                Objects.Add(o.Id, o);
+                Objects.Last().Value.ToType<XCircle>().Create(e);
+            }
         }
 
         public void UpdateDraw(Point e)
@@ -243,6 +255,10 @@ namespace XDrawerLib.Helpers
             if (DrawTool == Tool.Rectangle)
             {
                 Objects.Last().Value.ToType<XRectangle>().Update(e);
+            }
+            else if (DrawTool == Tool.SquareRounded)
+            {
+                Objects.Last().Value.ToType<XSquareRounded>().Update(e);
             }
             else if (DrawTool == Tool.Ellipse)
             {
@@ -268,6 +284,10 @@ namespace XDrawerLib.Helpers
             {
                 Objects.Last().Value.ToType<XCustom>().Update(e);
             }
+            else if (DrawTool == Tool.Circle)
+            {
+                Objects.Last().Value.ToType<XCircle>().Update(e);
+            }
         }
 
         public void FinishDraw()
@@ -280,6 +300,10 @@ namespace XDrawerLib.Helpers
                 Selector.FinishSelect();
             }
             else if (DrawTool == Tool.Rectangle)
+            {
+                Objects.Last().Value.Finish();
+            }
+            else if (DrawTool == Tool.SquareRounded)
             {
                 Objects.Last().Value.Finish();
             }
@@ -314,6 +338,10 @@ namespace XDrawerLib.Helpers
                 Objects.Last().Value.OwnedShape.Tag.ToType<XArrow>().Finish();
             }
             else if (DrawTool == Tool.Custom)
+            {
+                Objects.Last().Value.Finish();
+            }
+            else if (DrawTool == Tool.Circle)
             {
                 Objects.Last().Value.Finish();
             }

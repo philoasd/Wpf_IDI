@@ -25,6 +25,12 @@ namespace XDrawerLib.Helpers
             Shortcuts.Add(KeyFunction.Ellipse, new HotKey { PrimaryKey = Key.LeftCtrl, SecondaryKey = Key.E });
             Shortcuts.Add(KeyFunction.Text, new HotKey { PrimaryKey = Key.LeftCtrl, SecondaryKey = Key.T });
             Shortcuts.Add(KeyFunction.Triangle, new HotKey { PrimaryKey = Key.LeftCtrl, SecondaryKey = Key.N });
+            Shortcuts.Add(KeyFunction.BrokenLine, new HotKey { PrimaryKey = Key.LeftCtrl, SecondaryKey = Key.N });
+            Shortcuts.Add(KeyFunction.SquareRounded, new HotKey { PrimaryKey = Key.LeftCtrl, SecondaryKey = Key.N });
+            Shortcuts.Add(KeyFunction.Barcode, new HotKey { PrimaryKey = Key.LeftCtrl, SecondaryKey = Key.N });
+            Shortcuts.Add(KeyFunction.Image, new HotKey { PrimaryKey = Key.LeftCtrl, SecondaryKey = Key.N });
+            Shortcuts.Add(KeyFunction.Circle, new HotKey { PrimaryKey = Key.LeftCtrl, SecondaryKey = Key.N });
+
             //Shortcuts.Add(KeyFunction.Arrow, new HotKey { PrimaryKey = Key.LeftCtrl, SecondaryKey = Key.P });
             //Shortcuts.Add(KeyFunction.Custom, new HotKey { PrimaryKey = Key.LeftCtrl, SecondaryKey = Key.H });
             Shortcuts.Add(KeyFunction.PreserveSize, new HotKey { PrimaryKey = Key.LeftShift });
@@ -117,6 +123,10 @@ namespace XDrawerLib.Helpers
                 Drawer.DrawTool = Tool.Rectangle;
                 Console.WriteLine("rectangle");
             }
+            else if (function.Value.Key == KeyFunction.SquareRounded)
+            {
+                Drawer.DrawTool = Tool.SquareRounded;
+            }
             else if (function.Value.Key == KeyFunction.Ellipse)
             {
                 Drawer.DrawTool = Tool.Ellipse;
@@ -131,6 +141,31 @@ namespace XDrawerLib.Helpers
             {
                 Drawer.DrawTool = Tool.Triangle;
                 Console.WriteLine("triange");
+            }
+            else if (function.Value.Key == KeyFunction.BrokenLine)
+            {
+                Drawer.DrawTool = Tool.BrokenLine;
+                Console.WriteLine("broken line");
+            }
+            else if (function.Value.Key == KeyFunction.SquareRounded)
+            {
+                Drawer.DrawTool = Tool.SquareRounded;
+                Console.WriteLine("square rounded");
+            }
+            else if (function.Value.Key == KeyFunction.Barcode)
+            {
+                Drawer.DrawTool = Tool.Barcode;
+                Console.WriteLine("barcode");
+            }
+            else if (function.Value.Key == KeyFunction.Image)
+            {
+                Drawer.DrawTool = Tool.Image;
+                Console.WriteLine("image");
+            }
+            else if (function.Value.Key == KeyFunction.Circle)
+            {
+                Drawer.DrawTool = Tool.Circle;
+                Console.WriteLine("circle");
             }
             //else if (function.Value.Key == KeyFunction.Arrow)
             //{

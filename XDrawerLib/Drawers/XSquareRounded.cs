@@ -4,10 +4,9 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using XDrawerLib.Helpers;
-
 namespace XDrawerLib.Drawers
 {
-    public class XRectangle : XShape, IShape
+    public class XSquareRounded : XShape, IShape
     {
         public Rectangle Drawing;
 
@@ -74,9 +73,13 @@ namespace XDrawerLib.Drawers
                 Drawing.Width = Math.Abs(diffX);
                 Drawing.Height = Math.Abs(diffY);
             }
+
+            //圆角
+            Drawing.RadiusX = (int)(Drawing.Width / 10);
+            Drawing.RadiusY = (int)(Drawing.Height / 10);
         }
 
-        public XRectangle(Drawer drawer) : base(drawer)
+        public XSquareRounded(Drawer drawer) : base(drawer)
         {
             Drawer = drawer;
         }

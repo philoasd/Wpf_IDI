@@ -1703,7 +1703,7 @@ namespace Wpf_IDI
             };
             this.CircleOutline.Click += delegate (object sender, RoutedEventArgs e)
             {
-                //Drawer.DrawTool = Tool.Circle;
+                Drawer.DrawTool = Tool.Circle;
             };
             this.TriangleOutline.Click += delegate (object sender, RoutedEventArgs e)
             {
@@ -1711,7 +1711,7 @@ namespace Wpf_IDI
             };
             this.BrokenLine.Click += delegate (object sender, RoutedEventArgs e)
             {
-                //Drawer.DrawTool = Tool.BrokenLine;
+                Drawer.DrawTool = Tool.BrokenLine;
             };
             this.EllipseOutline.Click += delegate (object sender, RoutedEventArgs e)
             {
@@ -1719,11 +1719,11 @@ namespace Wpf_IDI
             };
             this.SquareRoundedOutline.Click += delegate (object sender, RoutedEventArgs e)
             {
-                //Drawer.DrawTool = Tool.SquareRounded;
+                Drawer.DrawTool = Tool.SquareRounded;
             };
             this.Barcode.Click += delegate (object sender, RoutedEventArgs e)
             {
-                //Drawer.DrawTool = Tool.Barcode;
+                Drawer.DrawTool = Tool.Barcode;
             };
             this.FormatTextVariantOutline.Click += delegate (object sender, RoutedEventArgs e)
             {
@@ -1731,7 +1731,7 @@ namespace Wpf_IDI
             };
             this.Image.Click += delegate (object sender, RoutedEventArgs e)
             {
-                //Drawer.DrawTool = Tool.Image;
+                Drawer.DrawTool = Tool.Image;
             };
         }
 
