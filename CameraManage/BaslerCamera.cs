@@ -2,7 +2,7 @@
 
 namespace CameraManage
 {
-    public class BaslerCamera
+    public class BaslerCamera : BaseCamera
     {
         public BaslerCamera()
         {
@@ -16,16 +16,6 @@ namespace CameraManage
         private Camera _Camera;
 
         /// <summary>
-        /// 图像信息
-        /// </summary>
-        public struct CameraData
-        {
-            public byte[] data; // 数据
-            public int width; // 宽
-            public int height; // 高
-        }
-
-        /// <summary>
         /// 储存相机信息的字典
         /// string: camera index; <string, object>: <information name, information>
         /// </summary>
@@ -34,7 +24,7 @@ namespace CameraManage
         /// <summary>
         /// send the image data to main function
         /// </summary>
-        public event Action<CameraData> ImageCaptured; // byte[]: image data; int: image width
+        public event Action<CameraData> ImageCaptured;
 
         public bool bSaveImage = false; //是否需要保存图像
         private string strSavePath = ""; //图像保存的路径
@@ -42,7 +32,7 @@ namespace CameraManage
         /// <summary>
         /// 相机曝光
         /// </summary>
-        public double Exposure
+        public override double Exposure
         {
             get
             {
@@ -67,7 +57,7 @@ namespace CameraManage
         /// <summary>
         /// 相机宽
         /// </summary>
-        public double ImageWidth
+        public override double ImageWidth
         {
             get
             {
@@ -78,7 +68,7 @@ namespace CameraManage
         /// <summary>
         /// 相机高
         /// </summary>
-        public double ImageHeight
+        public override double ImageHeight
         {
             get
             {
@@ -89,7 +79,7 @@ namespace CameraManage
         /// <summary>
         /// 获取相机名称信息
         /// </summary>
-        public void GetCameraInfoDic()
+        public override void GetCameraInfoDic()
         {
             var cameraFindList = CameraFinder.Enumerate();
             foreach (var camera in cameraFindList)
@@ -105,7 +95,7 @@ namespace CameraManage
         /// 连接到指定名称的相机
         /// </summary>
         /// <param name="serialNumber"></param>
-        public void ConnectedCamera(string serialNumber)
+        public override void ConnectedCamera(string serialNumber)
         {
             _Camera = new Camera(serialNumber);
             _Camera.StreamGrabber.ImageGrabbed += StreamGrabber_ImageGrabbed;
@@ -120,7 +110,7 @@ namespace CameraManage
         /// <summary>
         /// 断开相机连接
         /// </summary>
-        public void DisconnectedCamera()
+        public override void DisconnectedCamera()
         {
             if (_Camera != null)
             {
@@ -167,7 +157,7 @@ namespace CameraManage
         /// <summary>
         /// 单次取图
         /// </summary>
-        public void GrabOnce()
+        public override void GrabOnce()
         {
             if (_Camera == null || !_Camera.IsOpen) { return; }
             if (_Camera.StreamGrabber.IsGrabbing)
@@ -180,7 +170,7 @@ namespace CameraManage
         /// <summary>
         /// 连续取图
         /// </summary>
-        public void GrabContinue()
+        public override void GrabContinue()
         {
             if (_Camera == null || !_Camera.IsOpen) { return; }
             _Camera.StreamGrabber.Start(GrabStrategy.LatestImages, GrabLoop.ProvidedByStreamGrabber);
@@ -189,7 +179,7 @@ namespace CameraManage
         /// <summary>
         /// 停止取图
         /// </summary>
-        public void StopGrab()
+        public override void StopGrab()
         {
             if (_Camera == null || !_Camera.IsOpen) { return; }
             _Camera.StreamGrabber.Stop();
@@ -200,7 +190,7 @@ namespace CameraManage
         /// 保存图像
         /// </summary>
         /// <param name="savePath">图像路径</param>
-        public void SaveImage(string savePath)
+        public override void SaveImage(string savePath)
         {
             if (_Camera == null || !_Camera.IsOpen) { return; }
 

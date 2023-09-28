@@ -1733,6 +1733,28 @@ CornerRadius="{Binding ActualHeight, Converter={StaticResource ValueHalf}, Eleme
                                     </Button>
                                 </Grid>
                             </GroupBox>
+                            <Grid Margin="0,216,0,610">
+                                <GroupBox Header="Shape Parameter">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Width :" TextAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="ShapeWidth" Text="100" TextAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1"/>
+                                        <TextBlock Grid.Row="0" Grid.Column="2" Text="Height :" TextAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBox Grid.Row="0" Grid.Column="3" x:Name="ShapeHeight" Text="100" TextAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1"/>
+                                    </Grid>
+                                </GroupBox>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </TabItem>

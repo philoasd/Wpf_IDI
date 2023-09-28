@@ -115,6 +115,7 @@
   <ItemGroup>
     <Compile Include="Drawers\IShape.cs" />
     <Compile Include="Drawers\XArrow.cs" />
+    <Compile Include="Drawers\XBrokenLine.cs" />
     <Compile Include="Drawers\XCircle.cs" />
     <Compile Include="Drawers\XCustom.cs" />
     <Compile Include="Drawers\XEllipse.cs" />
