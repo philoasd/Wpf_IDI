@@ -1573,7 +1573,7 @@ namespace Wpf_IDI
                             }
                         }
                     }
-                    Thread.Sleep(100);
+                    Thread.Sleep(30);
                 }
             });
 
@@ -1623,8 +1623,8 @@ namespace Wpf_IDI
                                 }
                             }
                         }
-                        Thread.Sleep(100);
                     }
+                    Thread.Sleep(30);
                 }
             });
         }
